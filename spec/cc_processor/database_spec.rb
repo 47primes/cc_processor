@@ -3,7 +3,6 @@ require 'spec_helper'
 describe CCProcessor::Database do
 
   describe ".init" do
-
     it "should connect to database" do
       expect { ActiveRecord::Base.connection }.to raise_error(ActiveRecord::ConnectionNotEstablished)
 
@@ -28,7 +27,20 @@ describe CCProcessor::Database do
 
 
     end
+  end
 
+  context "helper methods" do
+    describe "path" do
+      it "should return the file path of the SQLite database" do
+        expect(CCProcessor::Database.path).to eq(File.expand_path("../../../db/cc_processor_test.sqlite3", __FILE__))
+      end
+    end
+
+    describe "exists?" do
+      it "should return a boolean based on whether or not the database file exists" do
+        expect(CCProcessor::Database.exists?).to eq(File.exists?(File.expand_path("../../../db/cc_processor_test.sqlite3", __FILE__)))
+      end
+    end
   end
 
 end
