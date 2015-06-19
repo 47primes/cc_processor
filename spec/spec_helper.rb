@@ -1,6 +1,5 @@
 require 'cc_processor'
 require 'rspec'
-# require 'database_cleaner'
 
 CCProcessor.env = "test"
 

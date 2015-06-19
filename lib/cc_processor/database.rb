@@ -14,7 +14,6 @@ module CCProcessor
       def init
         connect
         create_database
-        load_schema
       end
 
       def path
@@ -36,17 +35,12 @@ module CCProcessor
         unless exists?
           begin
             ActiveRecord::Tasks::SQLiteDatabaseTasks.new(CONFIG[CCProcessor.env], ROOT).create
+            load SCHEMA_PATH
           rescue Exception => error
             ActiveRecord::Base.logger.error "#{error.message}\n#{error.backtrace.join("\n")}"
             raise "Couldn't create database for #{CONFIG[CCProcessor.env].inspect}: #{error.message}"
           end
         end
-      end
-
-      def load_schema
-        CreditCard.count
-      rescue ActiveRecord::StatementInvalid
-        
       end
     end
 
