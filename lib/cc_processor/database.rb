@@ -27,7 +27,9 @@ module CCProcessor
       private
 
       def connect
-        ActiveRecord::Base.logger = Logger.new(DB_LOG_PATH)
+        logger = Logger.new(DB_LOG_PATH)
+        logger.level = Logger::WARN
+        ActiveRecord::Base.logger = logger
         ActiveRecord::Base.establish_connection(CONFIG[CCProcessor.env])
       end
 
@@ -35,12 +37,17 @@ module CCProcessor
         unless exists?
           begin
             ActiveRecord::Tasks::SQLiteDatabaseTasks.new(CONFIG[CCProcessor.env], ROOT).create
-            load SCHEMA_PATH
+            ActiveRecord::Migration.verbose = false
+            load_schema
           rescue Exception => error
             ActiveRecord::Base.logger.error "#{error.message}\n#{error.backtrace.join("\n")}"
             raise "Couldn't create database for #{CONFIG[CCProcessor.env].inspect}: #{error.message}"
           end
         end
+      end
+
+      def load_schema
+        load SCHEMA_PATH
       end
     end
 

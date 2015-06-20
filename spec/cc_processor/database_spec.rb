@@ -1,6 +1,11 @@
 require 'spec_helper'
 
 describe CCProcessor::Database do
+  around(:each) do |example|
+    without_database do
+      example.run
+    end
+  end
 
   describe ".init" do
     it "should connect to database" do
@@ -16,13 +21,17 @@ describe CCProcessor::Database do
 
     it "should create database if it doesn't already exist" do
       expect(CCProcessor::Database.exists?).to eq(false)
-      expect { CardHolder.count }.to raise_error(ActiveRecord::StatementInvalid, "Could not find table 'card_holders'")
-      expect { CreditCard.count }.to raise_error(ActiveRecord::StatementInvalid, "Could not find table 'credit_cards'")
 
       CCProcessor::Database.init
 
       expect(CCProcessor::Database.exists?).to eq(true)
-      expect(CardHolder.count).to eq(0)
+    end
+
+    it "should load database schema" do
+      expect { CreditCard.count }.to raise_error(ActiveRecord::ConnectionNotEstablished)
+
+      CCProcessor::Database.init
+
       expect(CreditCard.count).to eq(0)
     end
   end

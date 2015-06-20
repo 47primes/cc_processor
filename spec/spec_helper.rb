@@ -1,5 +1,6 @@
 require 'cc_processor'
 require 'rspec'
+require 'database_cleaner'
 
 CCProcessor.env = "test"
 
@@ -7,7 +8,26 @@ RSpec.configure do |config|
   config.color      = true
   config.formatter  = :documentation
 
-  config.after(:each) do |example|
-    FileUtils.rm(CCProcessor::Database.path) if CCProcessor::Database.exists?
+  config.before(:suite) do
+    CCProcessor::Database.init
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with(:truncation)
   end
+
+  config.around(:each) do |example|
+    DatabaseCleaner.cleaning do
+      example.run
+    end
+  end
+end
+
+def without_database(&block)
+  if File.exists?(CCProcessor::Database.path)
+    FileUtils.rm(CCProcessor::Database.path)
+    ActiveRecord::Base.remove_connection
+  end
+
+  yield
+  
+  CCProcessor::Database.init
 end
