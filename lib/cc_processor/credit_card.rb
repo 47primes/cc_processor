@@ -3,11 +3,11 @@ class CreditCard < ActiveRecord::Base
   before_validation   :strip_name_and_number
 
   validates :name,    presence: true, uniqueness: true
-  validates :number,  presence: true
+  validates :number,  presence: true, length: { maximum: 19 }
   validates :limit,   presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :balance, presence: true
 
-  validate :passes_luhn10
+  validate :passes_luhn10, :within_limit
 
   private
 
@@ -34,6 +34,10 @@ class CreditCard < ActiveRecord::Base
       if (total * 9) % 10 != self.number[self.number.size - 1].to_i
         errors[:number] << "is invalid"
       end
+    end
+
+    def within_limit
+      errors[:balance] << "balance exceeds limit" if balance > limit
     end
 
 end

@@ -40,6 +40,15 @@ describe CreditCard do
         expect(credit_card.number).to eq("41111111111111111")
       end
     end
+
+    context "balance" do
+      it "cannot exceed limit" do
+        credit_card = CreditCard.new name: "Bob  \n", limit: 1000, number: "41111111111111111", balance: 1001
+
+        expect(credit_card.valid?).to eq(false)
+        expect(credit_card.errors[:balance]).to be_present
+      end
+    end
   end
 
 end

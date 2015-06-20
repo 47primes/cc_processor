@@ -45,4 +45,27 @@ describe CCProcessor::CLI do
     end
   end
 
+  describe ".charge" do
+    it "should increase the balance of the card found by name by the specified amount" do
+      args = %w(Tom 4111111111111111 1000)
+      credit_card = CCProcessor::CLI.add(*args)
+
+      CCProcessor::CLI.charge("Tom", 55)
+      credit_card.reload
+
+      expect(credit_card.balance).to eq(55)
+    end
+
+    it "should do nothing if the credit card can't be found from the specified name" do
+      args = %w(Tom 4111111111111111 1000)
+      credit_card = CCProcessor::CLI.add(*args)
+      expect(credit_card.balance).to eq(0)
+
+      CCProcessor::CLI.charge("Jerry", 55)
+      
+      credit_card.reload
+      expect(credit_card.balance).to eq(0)
+    end
+  end
+
 end
