@@ -20,11 +20,11 @@ describe CCProcessor::Database do
     end
 
     it "should create database if it doesn't already exist" do
-      expect(CCProcessor::Database.exists?).to eq(false)
+      expect(File.exists?(CCProcessor::Database.path)).to eq(false)
 
       CCProcessor::Database.init
 
-      expect(CCProcessor::Database.exists?).to eq(true)
+      expect(File.exists?(CCProcessor::Database.path)).to eq(true)
     end
 
     it "should load database schema" do
@@ -58,12 +58,6 @@ describe CCProcessor::Database do
     describe ".path" do
       it "should return the file path of the SQLite database" do
         expect(CCProcessor::Database.path).to eq(File.expand_path("../../../db/cc_processor_test.sqlite3", __FILE__))
-      end
-    end
-
-    describe ".exists?" do
-      it "should return a boolean based on whether or not the database file exists" do
-        expect(CCProcessor::Database.exists?).to eq(File.exists?(File.expand_path("../../../db/cc_processor_test.sqlite3", __FILE__)))
       end
     end
   end

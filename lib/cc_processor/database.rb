@@ -27,13 +27,10 @@ module CCProcessor
         File.expand_path(File.join("..", CONFIG[CCProcessor.env]["database"]), ROOT)
       end
 
-      def exists?
-        File.exists?(path)
-      end
-
       private
 
       def connect
+        FileUtils.mkdir_p(File.dirname(DB_LOG_PATH))
         file = File.open(DB_LOG_PATH, File::CREAT|File::WRONLY|File::APPEND)
         logger = Logger.new(file)
         logger.level = Logger::WARN
@@ -42,20 +39,19 @@ module CCProcessor
       end
 
       def create_database
-        unless exists?
+        unless File.exists?(path)
           begin
             ActiveRecord::Tasks::SQLiteDatabaseTasks.new(CONFIG[CCProcessor.env], ROOT).create
             ActiveRecord::Migration.verbose = false
-            load_schema
+            load SCHEMA_PATH
+          rescue ActiveRecord::Tasks::DatabaseAlreadyExists
+            ActiveRecord::Migration.verbose = false
+            load SCHEMA_PATH
           rescue Exception => error
             ActiveRecord::Base.logger.error "#{error.message}\n#{error.backtrace.join("\n")}"
             raise "Couldn't create database for #{CONFIG[CCProcessor.env].inspect}: #{error.message}"
           end
         end
-      end
-
-      def load_schema
-        load SCHEMA_PATH
       end
     end
 
