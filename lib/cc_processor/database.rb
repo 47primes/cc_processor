@@ -34,7 +34,8 @@ module CCProcessor
       private
 
       def connect
-        logger = Logger.new(DB_LOG_PATH)
+        file = File.open(DB_LOG_PATH, File::CREAT|File::WRONLY|File::APPEND)
+        logger = Logger.new(file)
         logger.level = Logger::WARN
         ActiveRecord::Base.logger = logger
         ActiveRecord::Base.establish_connection(CONFIG[CCProcessor.env])
