@@ -10,8 +10,8 @@ RSpec.configure do |config|
 
   config.before(:suite) do
     CCProcessor::Database.init
-    DatabaseCleaner.strategy = :transaction
-    DatabaseCleaner.clean_with(:truncation)
+    DatabaseCleaner.strategy = :deletion
+    DatabaseCleaner.clean_with(:deletion)
   end
 
   config.after(:suite) do

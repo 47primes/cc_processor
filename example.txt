@@ -1,0 +1,64 @@
+Add Anthony   4111111111111111  $20000
+Charge Anthony $15000
+Add Juan      5285880073550972  $200
+Charge Anthony $4500
+Credit Anthony $4500
+Add Brad      5105105105105100  $4500
+Add Yvette    1234563890123456  $1000
+Charge Brad $5000
+Charge Brad $2000
+Credit Brad $199
+Add Catherine 341111111111111   $17000
+Add Derek     4539225732104109  $1000
+Add Edward    4485316891271518  $500
+Add Victor    343104321206795   $6100
+Add Walter    340324256354997   $900
+Add Xavier    1234567890123456  $5000
+Charge Edward $500
+Charge Edward $50
+Add Faye      4485969607682434  $26000
+Credit Faye $600
+Add Gail      4716527339141391  $3200
+Charge Gail $200
+Charge Gail $300
+Credit Gail $700
+Add Heather   4024007198131160  $4500
+Charge Heather $4600
+Add Ian       5176309039147840  $1000
+Charge Ian $100
+Charge Ian $55
+Charge Juan $199
+Add Kim       5212687177876783  $4500
+Charge Kim $4200
+Charge Kim $199
+Add Larry     5550977148794037  $6000
+Charge Larry $410
+Charge Larry $65
+Charge Larry $47
+Charge Xavier $52
+Charge Xavier $100
+Add Mike      5523131034449157  $10000
+Charge Mike $26
+Charge Mike $32
+Charge Mike $2688
+Charge Mike $147
+Add Nicole    6011044474680727  $20000
+Charge Nicole $10500
+Charge Nicole $7200
+Add Oscar     6011014516677569  $1000
+Charge Oscar $899
+Credit Larry $65
+Add Peter     6011857938657712  $7700
+Charge Peter $700
+Add Quincy    6011319692630328  $50
+Charge Quincy $0
+Credit Quincy $0
+Add Rachel    6011675304060844  $25
+Add Stephanie 343088898238549   $100
+Add Tucker    347864867984461   $4500
+Add Ursula    346302000092877   $10000
+Charge Xavier $45
+Charge Yvette $999
+Credit Yvette $99
+Charge Derek $999
+Add Zachary   1234567890123458  $2000
