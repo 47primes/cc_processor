@@ -28,11 +28,29 @@ describe CCProcessor::Database do
     end
 
     it "should load database schema" do
-      expect { CreditCard.count }.to raise_error(ActiveRecord::ConnectionNotEstablished)
+      expect { CCProcessor::CreditCard.count }.to raise_error(ActiveRecord::ConnectionNotEstablished)
 
       CCProcessor::Database.init
 
-      expect(CreditCard.count).to eq(0)
+      expect(CCProcessor::CreditCard.count).to eq(0)
+    end
+  end
+
+  describe ".drop" do
+    it "should drop the database and close the connection if database has been created" do
+      expect(File).to receive(:exists?).with(CCProcessor::Database.path).and_return(true)
+      expect(FileUtils).to receive(:rm).with(CCProcessor::Database.path)
+      expect(ActiveRecord::Base).to receive(:remove_connection)
+
+      CCProcessor::Database.drop
+    end
+
+    it "should do nothing if the database hasn't been created" do
+      expect(File).to receive(:exists?).with(CCProcessor::Database.path).and_return(false)
+      expect(FileUtils).not_to receive(:rm)
+      expect(ActiveRecord::Base).not_to receive(:remove_connection)
+
+      CCProcessor::Database.drop
     end
   end
 

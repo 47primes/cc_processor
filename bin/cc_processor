@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+# require 'cc_processor'
+require File.expand_path("../../lib/cc_processor", __FILE__)
+
+puts CCProcessor::CLI.parse(ARGV)
+
+at_exit do
+  CCProcessor::Database.drop
+end

@@ -14,6 +14,10 @@ RSpec.configure do |config|
     DatabaseCleaner.clean_with(:truncation)
   end
 
+  config.after(:suite) do
+    CCProcessor::Database.drop
+  end
+
   config.around(:each) do |example|
     DatabaseCleaner.cleaning do
       example.run
@@ -22,10 +26,7 @@ RSpec.configure do |config|
 end
 
 def without_database(&block)
-  if File.exists?(CCProcessor::Database.path)
-    FileUtils.rm(CCProcessor::Database.path)
-    ActiveRecord::Base.remove_connection
-  end
+  CCProcessor::Database.drop
 
   yield
   

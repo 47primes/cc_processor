@@ -16,6 +16,13 @@ module CCProcessor
         create_database
       end
 
+      def drop
+        if File.exists?(path)
+          FileUtils.rm(path)
+          ActiveRecord::Base.remove_connection
+        end
+      end
+
       def path
         File.expand_path(File.join("..", CONFIG[CCProcessor.env]["database"]), ROOT)
       end
