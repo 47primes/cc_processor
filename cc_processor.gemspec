@@ -5,10 +5,13 @@ require "cc_processor/version"
 Gem::Specification.new do |s|
   s.name          = "cc_processor"
   s.description   = "Basic Credit Card Processor"
+  s.summary       = "Adds new credit card accounts, process charges and credits against them, and display summary information"
   s.authors       = ["Mike Bradford"]
   s.email         = ["mbradford@47primes.com"]
+  s.homepage      = "https://www.braintreepayments.com"
   s.version       = CCProcessor::VERSION
   s.platform      = Gem::Platform::RUBY
+  s.license       = "Private"
 
   s.files         = `git ls-files`.split("\n")
   s.require_paths = ["lib"]
