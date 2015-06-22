@@ -78,17 +78,8 @@ The decision to use a persistent data store, SQLite, was motivated by a desire t
 
 The software is organized into 3 classes:
 
-CLI
----
-
 The `CLI` class is responsible for parsing command-line arguments, executing them, and building and displaying output.
 
-CreditCard
-----------
-
 The single data model, `CreditCard` defines, validates, and persists data with just a smidgen of presentation logic.
-
-Database
---------
 
 The `Database` class is responsible for connecting to the database, creating the table based on the defined schema, and dropping the connection when done.
