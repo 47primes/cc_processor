@@ -1,6 +1,6 @@
-# CCProcessor
+## CCProcessor
 
-## Basic Credit Card Processing
+Basic Credit Card Processing
 
 ### Requirements
 
@@ -8,30 +8,29 @@ Ruby >= 1.9.3
 
 ### Installation
 
-  cd /path/to/cc_processor/
-  gem install cc_processor-0.1.gem
+```bash
+cd /path/to/cc_processor/
+gem install cc_processor-0.1.gem
+```
 
 ### Usage
 
-#### 1
-
-   cc_processor COMMAND [arguments]
+`cc_processor COMMAND [arguments]`
 
 executes a single command
 
 specific commands: 
-  Add <Name> <Number> <Limit>
-  creates a new credit card for a given name, card number, and limit
 
-  Charge <Name> <Amount>
-  increases the balance of the card associated with the provided name by the amount specified
+`Add <Name> <Number> <Limit>`
+creates a new credit card for a given name, card number, and limit
 
-  Credit <Name> <Amount>
-  decreases the balance of the card associated with the provided name by the amount specified
+`Charge <Name> <Amount>`
+increases the balance of the card associated with the provided name by the amount specified
 
-#### 2
+`Credit <Name> <Amount>`
+decreases the balance of the card associated with the provided name by the amount specified
 
-   cc_processor path_to_batch_file
+`cc_processor path_to_batch_file`
 
 executes multiple commands as listed in a batch file Each line in the file must contain a single command.
 
@@ -47,9 +46,7 @@ Credit Lisa $100
 Credit Quincy $200
 ```
 
-#### 3
-
-   cat path_to_batch_file | cc_processor
+`cat path_to_batch_file | cc_processor`
 
 executes multiple commands from STDIN
 
@@ -59,11 +56,11 @@ Each line must contain a single command as described above.
 
 #### Install Bundler gem
 
-   gem install bundler
+`gem install bundler`
 
 #### Install and Run RSpec
 
-```
+```bash
 cd /path/to/cc_processor
 
 bundle install
@@ -84,14 +81,14 @@ The software is organized into 3 classes:
 CLI
 ---
 
-The CLI class is responsible for parsing command-line arguments, executing them, and building and displaying output.
+The `CLI` class is responsible for parsing command-line arguments, executing them, and building and displaying output.
 
 CreditCard
 ----------
 
-The single data model, ```CreditCard``` defines, validates, and persists data with just a smidgen of presentation logic.
+The single data model, `CreditCard` defines, validates, and persists data with just a smidgen of presentation logic.
 
 Database
 --------
 
-The ```Database``` class is responsible for connecting to the database, creating the table based on the defined schema, and dropping the connection when done.
+The `Database` class is responsible for connecting to the database, creating the table based on the defined schema, and dropping the connection when done.
