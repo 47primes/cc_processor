@@ -51,6 +51,8 @@ module CCProcessor
           charge(*args)
         when "Credit"
           credit(*args)
+        else
+          raise "Invalid command #{command}"
         end
       end
 
