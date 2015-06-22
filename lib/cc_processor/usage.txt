@@ -1,7 +1,7 @@
 cc_processor: Basic Credit Card Processor
 
 usage 1: cc_processor COMMAND [arguments]
-  perform a single command
+  execute a single command
 
 specific commands: 
   Add <Name> <Number> <Limit>
@@ -14,7 +14,7 @@ specific commands:
   decreases the balance of the card associated with the provided name by the amount specified
 
 usage 2: cc_processor path_to_batch_file
-  perform multiple commands as listed in a batch file
+  execute multiple commands as listed in a batch file
 
   Each line in the file must contain a single command.
 
@@ -29,6 +29,6 @@ usage 2: cc_processor path_to_batch_file
     Credit Quincy $200
 
 usage 3: cat path_to_batch_file | cc_processor
-  perform multiple commands from STDIN
+  execute multiple commands from STDIN
 
   Each line must contain a single command as described above.

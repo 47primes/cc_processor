@@ -1,6 +1,5 @@
 #!/usr/bin/env ruby
 
-# require File.expand_path("../../lib/cc_processor", __FILE__)
 require "cc_processor"
 
 cli = CCProcessor::CLI.new
